@@ -3,6 +3,7 @@ import React, {
   } from 'react';
 import ReactDOM from "react-dom";
 import PropTypes from 'prop-types';
+import  SalaryDiagram from "./comparison.js";
 import './style.css';
 
 class InputNum extends Component
@@ -186,7 +187,9 @@ class SalaryCalculator extends React.Component
         var incomeTaxMinusForBonus = rateminus.taxMinus;
         this.purebonus = this.bonus - (bonusForTax*incomeTaxRateForBonus-incomeTaxMinusForBonus);
         this.totalIncomeWithoutIns = this.pureIncomePerMonth*12+this.purebonus;
-        this.setState({totalIncome:(this.pureIncomePerMonth+this.medInssure+this.oldInssure+this.houseComm)*12+this.purebonus});
+        var totalIncome = (this.pureIncomePerMonth+this.medInssure+this.oldInssure+this.houseComm)*12+this.purebonus;
+        this.setState({totalIncome:totalIncome});
+        this.refs.SalaryDiagram.pushdata(this.totalIncomeWithoutIns,totalIncome);
     }
 
     render(){
@@ -200,17 +203,17 @@ class SalaryCalculator extends React.Component
                     <th></th>
                 </tr>
                 <tr>
-                    <td>输入月薪(1~1亿)：</td>
-                    <td colSpan="2"><InputNum ref="Salary" limit_up={1e8} limit_down={1} value="10000" changeValue={this.changeSalary.bind(this)}/></td>
+                    <td colSpan="2">输入月薪(1~1亿)：</td>
+                    <td><InputNum ref="Salary" limit_up={1e8} limit_down={1} value="10000" changeValue={this.changeSalary.bind(this)}/></td>
                 </tr>
                 <tr>
-                    <td> 输入五险一金基准月薪(1~月薪)： </td>
-                    <td colSpan="2"><InputNum ref="BaseSalary" limit_up={10000} limit_down={1} value="10000"/></td>
+                    <td colSpan="2"> 输入五险一金基准月薪(1~月薪)： </td>
+                    <td><InputNum ref="BaseSalary" limit_up={10000} limit_down={1} value="10000"/></td>
                     {console.log("output base salary ")}
                 </tr>
                 <tr>
-                    <td> 输入月薪数量(12~1000)： </td>
-                    <td colSpan="2"><InputNum ref="SalaryNumber" limit_up={10000} limit_down={12} value="15"/></td>
+                    <td colSpan="2"> 输入月薪数量(12~1000)： </td>
+                    <td><InputNum ref="SalaryNumber" limit_up={10000} limit_down={12} value="15"/></td>
                 </tr>
                 <tr>
                     <td colSpan="3"> </td>
@@ -221,57 +224,60 @@ class SalaryCalculator extends React.Component
                     <td>单位比例 %</td>
                 </tr>
                 <tr>
-                    <td>养老保险</td>
+                    <td class="inputlabel">养老保险</td>
                     <td><InputNum ref="OldInssureRate0" limit_up={100} limit_down={0} value="8"/></td>
                     <td><InputNum ref="OldInssureRate1" limit_up={100} limit_down={0} value="20"/></td>
                 </tr>
                 <tr>
-                    <td>医疗保险</td>
+                    <td class="inputlabel">医疗保险</td>
                     <td><InputNum ref="MedInssureRate0" limit_up={100} limit_down={0} value="2"/></td>
                     <td><InputNum ref="MedInssureRate1" limit_up={100} limit_down={0} value="11"/></td>
                 </tr>
                 <tr>
-                    <td>失业保险</td>
+                    <td class="inputlabel">失业保险</td>
                     <td><InputNum ref="JobInssureRate0" limit_up={100} limit_down={0} value="0.5"/></td>
                     <td><InputNum ref="JobInssureRate1" limit_up={100} limit_down={0} value="1.5"/></td>
                 </tr>
                 <tr>
-                    <td>住房公积金</td>
+                    <td className="inputlabel">住房公积金</td>
                     <td><InputNum ref="HouseCommRate0" limit_up={100} limit_down={0} value="12"/></td>
                     <td><InputNum ref="HouseCommRate1" limit_up={100} limit_down={0} value="12"/></td>
                 </tr>
                 <tr>
-                    <td>工伤保险</td>
+                    <td className="inputlabel">工伤保险</td>
                     <td><InputNum ref="WorkInjureInssureRate0" limit_up={100} limit_down={0} value="0"/></td>
                     <td><InputNum ref="WorkInjureInssureRate1" limit_up={100} limit_down={0} value="0.5"/></td>
                 </tr>
                 <tr>
-                    <td>生育保险</td>
+                    <td className="inputlabel">生育保险</td>
                     <td><InputNum ref="ReproductionInssureRate0" limit_up={100} limit_down={0} value="0"/></td>
                     <td><InputNum ref="ReproductionInssureRate1" limit_up={100} limit_down={0} value="1"/></td>
                 </tr>
                 <tr>
-                    <td>扣除数（元）</td>
+                    <td className="inputlabel">扣除数（元）</td>
                     <td colSpan='2' ><InputNum ref="IncomeTaxDiscount" limit_up={1e8} limit_down={1} value="3500"/></td>
                 </tr>
                 <tr>
                     <td colSpan='3' ><button className="calculatebutton" type="button" onClick={this.handleClick.bind(this)}>计算收入</button></td>
                 </tr>
-                <tr><td colSpan='3'>公积金：{this.houseComm}</td></tr>
-                <tr><td colSpan='3'>医疗保险：{this.medInssure}</td></tr>
-                <tr><td colSpan='3'>养老保险：{this.oldInssure}</td></tr>
-                <tr><td colSpan='3'>每月收入扣除的五险一金数量：{this.minusAmount}</td></tr>
-                <tr><td colSpan='3'>月收入个人所得税率：{this.incomeTaxRate}</td></tr>
-                <tr><td colSpan='3'>月收入个人所得税应扣除数：{this.incomeTaxMinus}</td></tr>
-                <tr><td colSpan='3'>净月收入：{this.pureIncomePerMonth}</td></tr>
-                <tr><td colSpan='3'>税前奖金：{this.bonus}</td></tr>
-                <tr><td colSpan='3'>税前奖金：{this.bonus}</td></tr>
-                <tr><td colSpan='3'>税后奖金：{this.purebonus}</td></tr>
-                <tr><td colSpan='3'>不计五险一金年收入：{this.totalIncomeWithoutIns}</td></tr>
-                <tr><td colSpan='3'>计医疗养老保险与住房公积金年收入：{this.state.totalIncome}</td></tr>
-                
                 </tbody>
             </table>
+            <SalaryDiagram ref="SalaryDiagram"/>
+            <div>
+            <ul>
+            <li>公积金：{this.houseComm.toFixed(2)}</li>
+            <li>医疗保险：{this.medInssure.toFixed(2)}</li>
+            <li>养老保险：{this.oldInssure.toFixed(2)}</li>
+            <li>每月收入扣除的五险一金数量：{this.minusAmount.toFixed(2)}</li>
+            <li>月收入个人所得税率：{this.incomeTaxRate.toFixed(2)}</li>
+            <li>月收入个人所得税应扣除数：{this.incomeTaxMinus.toFixed(2)}</li>
+            <li>净月收入：{this.pureIncomePerMonth.toFixed(2)}</li>
+            <li>税前奖金：{this.bonus.toFixed(2)}</li>
+            <li>税后奖金：{this.purebonus.toFixed(2)}</li>
+            <li>不计五险一金年收入：{this.totalIncomeWithoutIns.toFixed(2)}</li>
+            <li>计医疗养老保险与住房公积金年收入：{this.state.totalIncome.toFixed(2)}</li>
+            </ul>
+            </div>
             </div>
         );
     }

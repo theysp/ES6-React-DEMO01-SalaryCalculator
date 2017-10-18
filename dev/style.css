@@ -1,4 +1,6 @@
 table.salarycalculator {width: 100%;font-size: 4vw;}    
-button.calculatebutton {background-color: #678f8d;color: #ffffff; border-style:none ;width: 100%; font-size: 8vw}
-td {margin:0; padding:0;padding-left:2vw;padding-right:2vw}
+button.calculatebutton {background-color: #678f8d;color: #ffffff; border-style:none ;width: 100%; font-size: 8vw; padding:0}
+td {margin:0; padding:0;padding-left:1vw;padding-right:1vw}
+td.inputlabel {width:30%}
 input { width: 100%;font-size:4vw}
+li {width:100%;font-size: 3vw; color:rgb(38, 29, 116)}
