@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import Chart from "chart.js";
 import {Pie,Bar,Line} from "react-chartjs-2"
 
-
 class SalaryDiagram extends Component{
     constructor(props){
         super(props);
@@ -67,7 +66,7 @@ class SalaryDiagram extends Component{
 
     render(){
         return(
-            <div  style={{height:"100vh"}}>
+            <div  style={{height:"50vh"}}>
             <Bar ref="myBarSalary"
                 data = {this.state.data}
                 options={{maintainAspectRatio: false}}

@@ -195,89 +195,81 @@ class SalaryCalculator extends React.Component
     render(){
         return (
             <div>
-            <table className="salarycalculator">
-            <tbody> 
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td colSpan="2">输入月薪(1~1亿)：</td>
-                    <td><InputNum ref="Salary" limit_up={1e8} limit_down={1} value="10000" changeValue={this.changeSalary.bind(this)}/></td>
-                </tr>
-                <tr>
-                    <td colSpan="2"> 输入五险一金基准月薪(1~月薪)： </td>
-                    <td><InputNum ref="BaseSalary" limit_up={10000} limit_down={1} value="10000"/></td>
-                    {console.log("output base salary ")}
-                </tr>
-                <tr>
-                    <td colSpan="2"> 输入月薪数量(12~1000)： </td>
-                    <td><InputNum ref="SalaryNumber" limit_up={10000} limit_down={12} value="15"/></td>
-                </tr>
-                <tr>
-                    <td colSpan="3"> </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td style={{align:"center"}}>个人比例 %</td>
-                    <td>单位比例 %</td>
-                </tr>
-                <tr>
-                    <td class="inputlabel">养老保险</td>
-                    <td><InputNum ref="OldInssureRate0" limit_up={100} limit_down={0} value="8"/></td>
-                    <td><InputNum ref="OldInssureRate1" limit_up={100} limit_down={0} value="20"/></td>
-                </tr>
-                <tr>
-                    <td class="inputlabel">医疗保险</td>
-                    <td><InputNum ref="MedInssureRate0" limit_up={100} limit_down={0} value="2"/></td>
-                    <td><InputNum ref="MedInssureRate1" limit_up={100} limit_down={0} value="11"/></td>
-                </tr>
-                <tr>
-                    <td class="inputlabel">失业保险</td>
-                    <td><InputNum ref="JobInssureRate0" limit_up={100} limit_down={0} value="0.5"/></td>
-                    <td><InputNum ref="JobInssureRate1" limit_up={100} limit_down={0} value="1.5"/></td>
-                </tr>
-                <tr>
-                    <td className="inputlabel">住房公积金</td>
-                    <td><InputNum ref="HouseCommRate0" limit_up={100} limit_down={0} value="12"/></td>
-                    <td><InputNum ref="HouseCommRate1" limit_up={100} limit_down={0} value="12"/></td>
-                </tr>
-                <tr>
-                    <td className="inputlabel">工伤保险</td>
-                    <td><InputNum ref="WorkInjureInssureRate0" limit_up={100} limit_down={0} value="0"/></td>
-                    <td><InputNum ref="WorkInjureInssureRate1" limit_up={100} limit_down={0} value="0.5"/></td>
-                </tr>
-                <tr>
-                    <td className="inputlabel">生育保险</td>
-                    <td><InputNum ref="ReproductionInssureRate0" limit_up={100} limit_down={0} value="0"/></td>
-                    <td><InputNum ref="ReproductionInssureRate1" limit_up={100} limit_down={0} value="1"/></td>
-                </tr>
-                <tr>
-                    <td className="inputlabel">扣除数（元）</td>
-                    <td colSpan='2' ><InputNum ref="IncomeTaxDiscount" limit_up={1e8} limit_down={1} value="3500"/></td>
-                </tr>
-                <tr>
-                    <td colSpan='3' ><button className="calculatebutton" type="button" onClick={this.handleClick.bind(this)}>计算收入</button></td>
-                </tr>
-                </tbody>
-            </table>
-            <SalaryDiagram ref="SalaryDiagram"/>
-            <div>
-            <ul>
-            <li>公积金：{this.houseComm.toFixed(2)}</li>
-            <li>医疗保险：{this.medInssure.toFixed(2)}</li>
-            <li>养老保险：{this.oldInssure.toFixed(2)}</li>
-            <li>每月收入扣除的五险一金数量：{this.minusAmount.toFixed(2)}</li>
-            <li>月收入个人所得税率：{this.incomeTaxRate.toFixed(2)}</li>
-            <li>月收入个人所得税应扣除数：{this.incomeTaxMinus.toFixed(2)}</li>
-            <li>净月收入：{this.pureIncomePerMonth.toFixed(2)}</li>
-            <li>税前奖金：{this.bonus.toFixed(2)}</li>
-            <li>税后奖金：{this.purebonus.toFixed(2)}</li>
-            <li>不计五险一金年收入：{this.totalIncomeWithoutIns.toFixed(2)}</li>
-            <li>计医疗养老保险与住房公积金年收入：{this.state.totalIncome.toFixed(2)}</li>
-            </ul>
-            </div>
+                <div>
+                    <div>
+                        <span className="label1">输入月薪(1~1亿)：</span>
+                        <span className="input"><InputNum ref="Salary" limit_up={1e8} limit_down={1} value="10000" changeValue={this.changeSalary.bind(this)}/></span>
+                    </div>
+                    <div>
+                        <span className="label1"> 输入五险一金基准月薪(1~月薪)： </span>
+                        <span className="input"><InputNum ref="BaseSalary" limit_up={10000} limit_down={1} value="10000"/></span>
+                        {console.log("output base salary ")}
+                    </div>
+                    <div>
+                        <span className="label1"> 输入月薪数量(12~1000)： </span>
+                        <span className="input"><InputNum ref="SalaryNumber" limit_up={10000} limit_down={12} value="15"/></span>
+                    </div>
+                    <div>
+                    </div>
+                    <div>
+                        <span className="label2"></span>
+                        <span className="label3" style={{align:"center"}}>个人比例 %</span>
+                        <span className="label3" style={{align:"center"}}>单位比例 %</span>
+                    </div>
+                    <div>
+                        <span className="label2">养老保险</span>
+                        <span className="input"><InputNum ref="OldInssureRate0" limit_up={100} limit_down={0} value="8"/></span>
+                        <span className="input"><InputNum ref="OldInssureRate1" limit_up={100} limit_down={0} value="20"/></span>
+                    </div>
+                    <div>
+                        <span className="label2">医疗保险</span>
+                        <span className="input"><InputNum ref="MedInssureRate0" limit_up={100} limit_down={0} value="2"/></span>
+                        <span className="input"><InputNum ref="MedInssureRate1" limit_up={100} limit_down={0} value="11"/></span>
+                    </div>
+                    <div>
+                        <span className="label2">失业保险</span>
+                        <span className="input"><InputNum ref="JobInssureRate0" limit_up={100} limit_down={0} value="0.5"/></span>
+                        <span className="input"><InputNum ref="JobInssureRate1" limit_up={100} limit_down={0} value="1.5"/></span>
+                    </div>
+                    <div>
+                        <span className="label2">住房公积金</span>
+                        <span className="input"><InputNum ref="HouseCommRate0" limit_up={100} limit_down={0} value="12"/></span>
+                        <span className="input"><InputNum ref="HouseCommRate1" limit_up={100} limit_down={0} value="12"/></span>
+                    </div>
+                    <div>
+                        <span className="label2">工伤保险</span>
+                        <span className="input"><InputNum ref="WorkInjureInssureRate0" limit_up={100} limit_down={0} value="0"/></span>
+                        <span className="input"><InputNum ref="WorkInjureInssureRate1" limit_up={100} limit_down={0} value="0.5"/></span>
+                    </div>
+                    <div>
+                        <span className="label2">生育保险</span>
+                        <span className="input"><InputNum ref="ReproductionInssureRate0" limit_up={100} limit_down={0} value="0"/></span>
+                        <span className="input"><InputNum ref="ReproductionInssureRate1" limit_up={100} limit_down={0} value="1"/></span>
+                    </div>
+                    <div>
+                        <span className="label1">扣除数（元）</span>
+                        <span className="input"><InputNum ref="IncomeTaxDiscount" limit_up={1e8} limit_down={1} value="3500"/></span>
+                    </div>
+                    <div>
+                        <span className="lineButton" ><button className="calculatebutton" type="button" onClick={this.handleClick.bind(this)}>计算收入</button></span>
+                    </div>
+                </div>
+                <SalaryDiagram ref="SalaryDiagram"/>
+                <div>
+                    <ul>
+                        <li>公积金：{this.houseComm.toFixed(2)}</li>
+                        <li>医疗保险：{this.medInssure.toFixed(2)}</li>
+                        <li>养老保险：{this.oldInssure.toFixed(2)}</li>
+                        <li>每月收入扣除的五险一金数量：{this.minusAmount.toFixed(2)}</li>
+                        <li>月收入个人所得税率：{this.incomeTaxRate.toFixed(2)}</li>
+                        <li>月收入个人所得税应扣除数：{this.incomeTaxMinus.toFixed(2)}</li>
+                        <li>净月收入：{this.pureIncomePerMonth.toFixed(2)}</li>
+                        <li>税前奖金：{this.bonus.toFixed(2)}</li>
+                        <li>税后奖金：{this.purebonus.toFixed(2)}</li>
+                        <li>不计五险一金年收入：{this.totalIncomeWithoutIns.toFixed(2)}</li>
+                        <li>计医疗养老保险与住房公积金年收入：{this.state.totalIncome.toFixed(2)}</li>
+                    </ul>
+                </div>
             </div>
         );
     }

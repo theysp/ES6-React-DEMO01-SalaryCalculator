@@ -1,6 +1,8 @@
-table.salarycalculator {width: 100%;font-size: 4vw;}    
-button.calculatebutton {background-color: #678f8d;color: #ffffff; border-style:none ;width: 100%; font-size: 8vw; padding:0}
-td {margin:0; padding:0;padding-left:1vw;padding-right:1vw}
-td.inputlabel {width:30%}
-input { width: 100%;font-size:4vw}
+input {width:100%; font-size:4vw;box-sizing: border-box;padding:0}
+span.input {width:30%;}
+span.label1 {width: 68%;padding-left:1%; font-size:4vw;}
+span.label2 {width: 38%;padding-left:1%; font-size:4vw;}
+span.label3 {width: 30%; font-size:4vw;}
+span.lineButton{width:100%;padding-top:1%;padding-bottom: 1%;padding-right:0;padding-left:0;}
+button.calculatebutton{width:100%;background-color: #73cf5b;color: #ffffff; border-style:none ;width: 100%; font-size: 8vw; padding:0}
 li {width:100%;font-size: 3vw; color:rgb(38, 29, 116)}
